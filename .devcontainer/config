@@ -1,9 +1,9 @@
 # SnowSQL config
 
 [connections.dev]
-accountname = myaccount
-username = myusername
-password = mypassword
+accountname = ccsf.us-gov-virginia.azure.snowflakecomputing.com
+username = tludewig
+password = Kentmere!1
 rolename = HOL_ROLE
 warehousename = HOL_WH
 dbname = HOL_DB

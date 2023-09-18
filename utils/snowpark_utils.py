@@ -25,7 +25,10 @@ def get_snowpark_session() -> Session:
     # related tools work IMO
     # if using snowsql config, like snowcli does
     elif os.path.exists(os.path.expanduser('~/.snowsql/config')):
+        print('getting local config file - apparently from under .devcontainer')
         snowpark_config = get_snowsql_config()
+        for k, v in snowpark_config.items():
+            print(k, ' and ', v)
         SnowflakeConnection().connection = Session.builder.configs(snowpark_config).create()
     # otherwise configure from environment variables
     elif "SNOWSQL_ACCOUNT" in os.environ:
@@ -71,12 +74,18 @@ def get_snowsql_config(
         connection_path = 'connections.' + connection_name
 
         config.read(config_file_path)
+        print(config_file_path)
         session_config = config[connection_path]
+        print(session_config)
         # Convert snowsql connection variable names to snowcli ones
         session_config_dict = {
             snowsql_to_snowpark_config_mapping[k]: v.strip('"')
             for k, v in session_config.items()
         }
+        for k, v in session_config_dict:
+            print(k, ' and ', v)
+        print('leaving utils')
+        print('account: ', session_config_dict['account'])
         return session_config_dict
     except Exception:
         raise Exception(

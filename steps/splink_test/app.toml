@@ -1,0 +1,17 @@
+snowsql_config_path = "~/.snowsql/config"
+snowsql_connection_name = "mohcd_data_science_model_conn"
+
+[default]
+input_parameters = "(temp_f float)"
+return_type = "float"
+file = "app.zip"
+name = "fahrenheit_to_celsius_udf"
+handler = "app.main"
+execute_as_caller = true
+
+[mohcd_data_science_model_conn]
+database = "MOHCD_DB"
+schema = "TEST"
+warehouse = "MOHCD_WH"
+role = "MOHCD_MODEL_ROLE"
+overwrite = true
